@@ -1,0 +1,9 @@
+1   cereal = load '/17L103/pig/cereals/cerealclean.csv' using PigStorage(',') as (name:chararray,mfr:chararray,type:chararray,calories:int,protein:int,fat:int,sodium:int,fiber:float,carbo:float,sugars:int,potass:int,vitamins:int,shelf:int,weight:float,cups:float,rating:float);
+2   groupbymfr = group cereal by mfr;
+3   orderbycalories = order cereal by calories desc;
+4   highestcaloriecontent = limit orderbycalories 1;
+7   store highestcaloriecontent into '/17L103/pig/cereals/highestcalorie';
+17   orderbyrating = order cereal by rating desc;
+18   top10 = limit orderbyrating 10;
+19   store top10 into '/17L103/pig/cereals/top10ratedcereal';
+
